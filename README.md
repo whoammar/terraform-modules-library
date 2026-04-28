@@ -1,44 +1,47 @@
-```markdown
-# Terraform AWS Modular Infrastructure Repository
+<div align="center">
 
-## 📌 Overview
+# 🏗️ Terraform AWS Modular Infrastructure
 
-This repository is a **production-grade Terraform modules library** designed to build scalable and reusable AWS infrastructure. It provides a **modular architecture approach** where each infrastructure component (VPC, EC2, S3, ECS) is independent, reusable, and production-ready.
+**A production-grade Terraform modules library for scalable, reusable AWS infrastructure.**
 
-**Why this repository exists:**
+[![Terraform](https://img.shields.io/badge/Terraform-≥1.5-7B42BC?logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![AWS](https://img.shields.io/badge/AWS-Cloud-FF9900?logo=amazonaws&logoColor=white)](https://aws.amazon.com/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-* ❌ Writing repeated Terraform code increases complexity
-* ❌ Hardcoded infrastructure slows down scaling
-* ❌ Managing multiple projects becomes inconsistent
-
-**Solutions provided:**
-
-* ✅ Reusable infrastructure modules
-* ✅ Standardized AWS architecture patterns
-* ✅ Faster deployment across multiple projects
-* ✅ Clean separation of concerns
-* ✅ Production-ready infrastructure design
+</div>
 
 ---
 
-## 🏗️ Architecture Flow
+## 📌 Overview
+
+This repository is a **production-grade Terraform modules library** designed to build scalable and reusable AWS infrastructure. It provides a modular architecture where each infrastructure component is independent, reusable, and production-ready.
+
+| Problem | Solution |
+|---|---|
+| ❌ Repeated Terraform code increases complexity | ✅ Reusable infrastructure modules |
+| ❌ Hardcoded infrastructure slows scaling | ✅ Standardized AWS architecture patterns |
+| ❌ Managing multiple projects becomes inconsistent | ✅ Clean separation of concerns |
+
+---
+
+## 🏛️ Architecture
 
 ```
-        ┌─────────────────────────────────────┐
-        │         Terraform Modules           │
-        │            Library                  │
-        └─────────────┬───────────────────────┘
-                      │
-        ┌─────────────┴───────────────────────┐
-        │                                     │
-    ┌───▼───┐    ┌─────▼────┐    ┌─────────┐
-    │  VPC  │    │   EC2    │    │   S3    │
-    └───┬───┘    └─────┬────┘    └────┬────┘
-        │              │              │
-    ┌───▼───┐      ┌───▼───┐      ┌───▼───┐
-    │Network│      │Compute│      │Storage│
-    │Layer  │      │ Layer │      │ Layer │
-    └───────┘      └───────┘      └───────┘
+┌──────────────────────────────────────┐
+│        Terraform Modules Library     │
+└────────────────┬─────────────────────┘
+                 │
+     ┌───────────┼───────────┐
+     │           │           │
+  ┌──▼──┐    ┌───▼──┐    ┌───▼──┐
+  │ VPC │    │  EC2 │    │  S3  │
+  └──┬──┘    └───┬──┘    └───┬──┘
+     │           │           │
+  ┌──▼────┐  ┌───▼───┐  ┌───▼────┐
+  │Network│  │Compute│  │Storage │
+  │ Layer │  │ Layer │  │  Layer │
+  └───────┘  └───────┘  └────────┘
 ```
 
 ---
@@ -46,28 +49,28 @@ This repository is a **production-grade Terraform modules library** designed to 
 ## 📁 Repository Structure
 
 ```
-Terraform Modules Final/
+terraform-modules-library/
 │
 ├── modules/
-│   ├── vpc/
+│   ├── vpc/              # Networking foundation
 │   │   ├── main.tf
 │   │   ├── variables.tf
 │   │   ├── outputs.tf
 │   │   └── README.md
 │   │
-│   ├── ec2/
+│   ├── ec2/              # Compute instances
 │   │   ├── main.tf
 │   │   ├── variables.tf
 │   │   ├── outputs.tf
 │   │   └── README.md
 │   │
-│   ├── s3/
+│   ├── s3/               # Object storage
 │   │   ├── main.tf
 │   │   ├── variables.tf
 │   │   ├── outputs.tf
 │   │   └── README.md
 │   │
-│   └── ecs/
+│   └── ecs/              # Container orchestration
 │       ├── main.tf
 │       ├── variables.tf
 │       ├── outputs.tf
@@ -85,73 +88,83 @@ Terraform Modules Final/
 
 ## 🧱 Available Modules
 
-### 🌐 VPC Module
-Creates a complete networking foundation.
+<details>
+<summary><strong>🌐 VPC Module</strong> — Complete networking foundation</summary>
 
-* Multi-AZ VPC
-* Public & Private Subnets
-* NAT Gateway (optional)
-* Route Tables
-* Security Groups (EC2 & DB)
+<br>
 
----
+Creates a full networking stack with all essential components:
 
-### 🖥️ EC2 Module
-Reusable EC2 provisioning module.
+- ✅ Multi-AZ VPC
+- ✅ Public & Private Subnets
+- ✅ NAT Gateway *(optional)*
+- ✅ Route Tables
+- ✅ Security Groups (EC2 & DB)
 
-* AMI-based instances
-* Security group support
-* User data scripts
-* SSM optional support
-* Environment tagging
+</details>
 
----
+<details>
+<summary><strong>🖥️ EC2 Module</strong> — Reusable compute provisioning</summary>
 
-### 🪣 S3 Module
-Flexible S3 bucket management module.
+<br>
 
-* Private by default
-* Static website hosting
-* Versioning support
-* Lifecycle rules
-* Logging support
-* Public access control options
+Flexible EC2 instance module supporting:
 
----
+- ✅ AMI-based instances
+- ✅ Security group support
+- ✅ User data scripts
+- ✅ SSM optional support
+- ✅ Environment tagging
 
-### 🚀 ECS Fargate Module
-Production-grade container orchestration module.
+</details>
 
-* Multi-service deployment (frontend/backend)
-* ALB integration
-* Path-based routing
-* CloudWatch logging
-* Autoscaling support
-* Fully serverless containers (Fargate)
+<details>
+<summary><strong>🪣 S3 Module</strong> — Flexible object storage</summary>
+
+<br>
+
+Full-featured S3 bucket management:
+
+- ✅ Private by default
+- ✅ Static website hosting
+- ✅ Versioning support
+- ✅ Lifecycle rules
+- ✅ Logging support
+- ✅ Public access control options
+
+</details>
+
+<details>
+<summary><strong>🚀 ECS Fargate Module</strong> — Production container orchestration</summary>
+
+<br>
+
+Enterprise-grade container deployment:
+
+- ✅ Multi-service deployment (frontend/backend)
+- ✅ ALB integration
+- ✅ Path-based routing
+- ✅ CloudWatch logging
+- ✅ Autoscaling support
+- ✅ Fully serverless containers (Fargate)
+
+</details>
 
 ---
 
 ## ⚙️ Prerequisites
 
-* Terraform ≥ 1.5
-* AWS CLI configured
-* IAM permissions for:
+Before getting started, ensure you have the following:
 
-  * VPC
-  * EC2
-  * ECS
-  * S3
-  * ALB
-  * IAM Roles
-  * CloudWatch
+- **Terraform** `≥ 1.5`
+- **AWS CLI** configured with appropriate credentials
+- **IAM Permissions** for: `VPC`, `EC2`, `ECS`, `S3`, `ALB`, `IAM Roles`, `CloudWatch`
 
 ---
 
-## 🚀 Usage
+## 🚀 Quick Start
 
-### 1️⃣ Reference a Module
-
-In your Terraform configuration:
+### 1️⃣ VPC Module
 
 ```hcl
 module "vpc" {
@@ -165,9 +178,7 @@ module "vpc" {
 }
 ```
 
----
-
-### 2️⃣ Deploy ECS Application
+### 2️⃣ ECS Fargate Application
 
 ```hcl
 module "ecs" {
@@ -185,9 +196,8 @@ module "ecs" {
       cpu           = 256
       memory        = 512
       desired_count = 1
-
-      path     = ["/api/*"]
-      priority = 10
+      path          = ["/api/*"]
+      priority      = 10
     }
 
     frontend = {
@@ -196,34 +206,28 @@ module "ecs" {
       cpu           = 256
       memory        = 512
       desired_count = 1
-
-      path     = ["/*"]
-      priority = 20
+      path          = ["/*"]
+      priority      = 20
     }
   }
 }
 ```
 
----
-
-### 3️⃣ Deploy EC2 Instance (Optional)
+### 3️⃣ EC2 Instance
 
 ```hcl
 module "ec2" {
   source = "git@github.com:whoammar/terraform-modules-library.git//modules/ec2"
 
-  ami_id        = "ami-0c55b159cbfafe1f0"
-  instance_type = "t2.micro"
-  subnet_id     = module.vpc.public_subnet_ids[0]
-
+  ami_id             = "ami-0c55b159cbfafe1f0"
+  instance_type      = "t2.micro"
+  subnet_id          = module.vpc.public_subnet_ids[0]
   security_group_ids = [module.vpc.ec2_sg_id]
   instance_name      = "web-server"
 }
 ```
 
----
-
-### 4️⃣ Create S3 Bucket
+### 4️⃣ S3 Bucket
 
 ```hcl
 module "s3" {
@@ -237,77 +241,75 @@ module "s3" {
 
 ---
 
-## 🧠 Design Principles
-
-* ✅ Reusability first
-* ✅ Environment agnostic design
-* ✅ Production-ready defaults
-* ✅ Minimal hardcoding
-* ✅ Secure-by-default architecture
-* ✅ Modular dependency flow
-
----
-
 ## 🔐 Security Best Practices
 
-* Private subnets for ECS workloads
-* Security groups for controlled access
-* ALB handles public traffic
-* No direct exposure of backend services
-* No secrets stored in repo
-* Use AWS Secrets Manager or SSM Parameter Store
+| Practice | Implementation |
+|---|---|
+| Private workloads | ECS services run in private subnets |
+| Controlled access | Security groups on all resources |
+| Public traffic handling | ALB manages ingress, not services directly |
+| No secret exposure | Use AWS Secrets Manager or SSM Parameter Store |
+| State security | Use remote backend (S3 + DynamoDB) |
+| Repo hygiene | Never commit `.tfstate` or sensitive `.tfvars` |
 
 ---
 
-## 📦 Real Projects Using This Repo
+## 🧠 Design Principles
 
-* ✅ VPN Tunnel Infrastructure
-* ✅ ECS Fargate Multi-tier Application
-* ✅ Mendhak Debug Echo Service
-* ✅ Static Website Hosting (S3)
-* ✅ EC2-based workloads
+```
+  Reusability First        →  Modules work across any project
+  Environment Agnostic     →  No environment-specific hardcoding
+  Production-Ready         →  Secure defaults out of the box
+  Modular Dependencies     →  Clean, predictable dependency flow
+  Secure by Default        →  Least-privilege, private-first architecture
+```
 
 ---
 
-## 🧹 Cleanup
+## 📦 Real-World Projects
 
-To destroy infrastructure created with these modules:
+| Project | Description |
+|---|---|
+| 🔒 VPN Tunnel Infrastructure | OpenVPN tunnel on EC2 |
+| 🚀 ECS Fargate Multi-tier App | Full frontend + API deployment |
+| 🔍 Mendhak Debug Echo Service | HTTP echo service for debugging |
+| 🌐 Static Website Hosting | S3-based static site |
+| 🖥️ EC2-based Workloads | General-purpose compute |
+
+---
+
+## 🗑️ Cleanup
+
+To tear down any infrastructure deployed with these modules:
 
 ```bash
 terraform destroy
 ```
 
----
-
-## ❗ Important Notes
-
-* Never commit:
-
-  * `.tfstate` files
-  * `.tfvars` (if containing sensitive data)
-* Always use remote backend (S3 + DynamoDB) in production
-* Keep modules independent and reusable
+> ⚠️ **Warning:** This is irreversible. Ensure you have backups of any important state or data before running.
 
 ---
 
-## 🔮 Future Enhancements
+## 🔮 Roadmap
 
-* CloudFront CDN Module
-* RDS Database Module
-* ALB/NLB Standalone Module
-* EKS Kubernetes Module
-* CI/CD Terraform Pipeline (GitHub Actions)
-* Monitoring with CloudWatch Dashboards
+- [ ] CloudFront CDN Module
+- [ ] RDS Database Module
+- [ ] Standalone ALB / NLB Module
+- [ ] EKS Kubernetes Module
+- [ ] CI/CD Pipeline via GitHub Actions
+- [ ] CloudWatch Dashboards Module
 
 ---
 
-## 🤝 Contribution Guidelines
+## 🤝 Contributing
 
-* Keep modules independent
-* Avoid hardcoded values
-* Follow variable-driven design
-* Maintain documentation per module
-* Test modules before submitting
+Contributions are welcome! Please follow these guidelines:
+
+1. Keep modules **independent** and self-contained
+2. Avoid **hardcoded values** — use variables
+3. Follow **variable-driven design** patterns
+4. **Document** every module with a `README.md`
+5. **Test** your module before submitting a PR
 
 ---
 
@@ -316,3 +318,7 @@ terraform destroy
 **Muhammad Ammar**
 
 ---
+
+<div align="center">
+  <sub>Built with ❤️ using Terraform & AWS</sub>
+</div>
